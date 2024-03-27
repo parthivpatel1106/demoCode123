@@ -18,4 +18,17 @@ app.listen(port,()=>{
 
 app.use(express.json())
 
+app.use((req, res, next) => {
+    // Set the appropriate headers for CORS
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3200'); // Replace with your client's domain
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    
+    // Set Access-Control-Allow-Credentials to true
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  
+    // Continue to the next middleware or route handler
+    next();
+  });
+
 app.use('/urlRouter',urlRouter)
